@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 14 Jun 2023 pada 18.52
+-- Waktu pembuatan: 26 Jun 2023 pada 15.51
 -- Versi server: 10.4.24-MariaDB
 -- Versi PHP: 7.4.29
 
@@ -39,7 +39,7 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`id`, `nama`, `email`, `password`) VALUES
-(0, 'ADMIN', 'admin@example.com', '5f4dcc3b5aa765d61d8327deb882cf99');
+(1, 'ADMIN', 'admin@example.com', '$2y$10$OHAyy8GhZp/l5SnUxsXdReX.Fg5f/O8200IjqE6q/S1sDXHZG3zYy');
 
 -- --------------------------------------------------------
 
@@ -54,6 +54,13 @@ CREATE TABLE `anggota` (
   `email` varchar(255) DEFAULT NULL,
   `telepon` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `anggota`
+--
+
+INSERT INTO `anggota` (`id`, `nama`, `alamat`, `email`, `telepon`) VALUES
+(1, 'Nama Lengkap 1', 'Condong Catur, Depok, Sleman, Di Yogyakarta', 'namalengkap1@gmail.com', '081234567890');
 
 -- --------------------------------------------------------
 
@@ -152,6 +159,46 @@ ALTER TABLE `peminjaman`
 ALTER TABLE `pengembalian`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_peminjaman` (`id_peminjaman`);
+
+--
+-- AUTO_INCREMENT untuk tabel yang dibuang
+--
+
+--
+-- AUTO_INCREMENT untuk tabel `admin`
+--
+ALTER TABLE `admin`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT untuk tabel `anggota`
+--
+ALTER TABLE `anggota`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT untuk tabel `buku`
+--
+ALTER TABLE `buku`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT untuk tabel `kategori`
+--
+ALTER TABLE `kategori`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT untuk tabel `peminjaman`
+--
+ALTER TABLE `peminjaman`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT untuk tabel `pengembalian`
+--
+ALTER TABLE `pengembalian`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
