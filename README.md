@@ -1,5 +1,12 @@
 # CodeIgniter 4 Application Starter
 
+Steps
+1. Terminal "composer update"
+2. rename "env" to ".env"
+3. email: admin@example.com
+4. pass: password
+
+
 ## What is CodeIgniter?
 
 CodeIgniter is a PHP full-stack web framework that is light, fast, flexible and secure.
