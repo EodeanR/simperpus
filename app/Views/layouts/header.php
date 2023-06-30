@@ -11,6 +11,9 @@
 
 <body>
 
-    <header class="bg-dark text-light py-3">
+    <header class="bg-dark text-light p-3">
         <h1 class="h2">Perpustakaan</h1>
+        <?php if (session('logged_in')) : ?>
+            <a href="/logout" class="btn btn-sm btn-outline-danger">Logout</a>
+        <?php endif; ?>
     </header>

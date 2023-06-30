@@ -1,7 +1,6 @@
-<footer class="bg-dark text-light py-3">
+<footer class="bg-dark text-light p-3">
     <h1>Footer</h1>
 </footer>
-
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous">
 </script>

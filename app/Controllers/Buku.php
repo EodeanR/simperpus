@@ -2,36 +2,38 @@
 
 namespace App\Controllers;
 
+use App\Models\BukuModel;
 use CodeIgniter\RESTful\ResourceController;
-use App\Models\AnggotaModel;
-use CodeIgniter\HTTP\Request;
 use Config\Services;
 
-class Anggota extends ResourceController
+class Buku extends ResourceController
 {
+
+    public function __construct()
+    {
+        $this->model = new BukuModel();
+    }
+    public function rules()
+    {
+        $rules = [
+            'judul' => 'required|min_length[1]',
+            'pengarang' => 'required',
+            'penerbit' => 'required',
+            'tahun_terbit' => 'required|numeric|max_length[4]',
+            'jumlah_halaman' => 'required|numeric|min_length[1]',
+            'sinopsis' => 'required|min_length[5]',
+        ];
+        return $rules;
+    }
     /**
      * Return an array of resource objects, themselves in array format
      *
      * @return mixed
      */
-    public function __construct()
-    {
-        $this->model = new AnggotaModel();
-    }
-    public function rules()
-    {
-        $rules = [
-            'nama' => 'required|min_length[3]',
-            'email' => 'required|valid_email',
-            'telepon' => 'required|min_length[10]',
-            'alamat' => 'required|min_length[5]',
-        ];
-        return $rules;
-    }
     public function index()
     {
-        $dataAnggota = $this->model->findAll();
-        return view('pages/anggota', ['anggota' => $dataAnggota]);
+        $dataBuku = $this->model->findAll();
+        return view('pages/buku', ['buku' => $dataBuku]);
     }
 
     /**
@@ -51,7 +53,7 @@ class Anggota extends ResourceController
      */
     public function new()
     {
-        return view('form/_anggota');
+        return view('form/_buku');
     }
 
     /**
@@ -65,17 +67,19 @@ class Anggota extends ResourceController
         $validation = Services::validation();
         $validation->setRules($this->rules());
         if (!$validation->withRequest($this->request)->run()) {
-            return redirect()->to('/anggota/new')->withInput()->with('errors', $validation->getErrors());
+            return redirect()->to('/buku/new')->withInput()->with('errors', $validation->getErrors());
         }
         $data = [
-            'nama' => $getData['nama'],
-            'email' => $getData['email'],
-            'telepon' => $getData['telepon'],
-            'alamat' => $getData['alamat'],
+            'judul' => $getData['judul'],
+            'pengarang' => $getData['pengarang'],
+            'penerbit' => $getData['penerbit'],
+            'tahun_terbit' => $getData['tahun_terbit'],
+            'jumlah_halaman' => $getData['jumlah_halaman'],
+            'sinopsis' => $getData['sinopsis'],
         ];
-        $anggotaModel = new AnggotaModel;
-        $anggotaModel->insert($data);
-        return redirect()->to('/anggota')->with('success', 'Data berhasil ditambahkan');
+        $bukuModel = new BukuModel;
+        $bukuModel->insert($data);
+        return redirect()->to('/buku')->with('success', 'Data berhasil ditambahkan');
     }
 
     /**
@@ -86,7 +90,7 @@ class Anggota extends ResourceController
     public function edit($id = null)
     {
         $data = $this->model->where('id', $id)->first();
-        return view('form/_anggota', ['data' => $data]);
+        return view('form/_buku', ['data' => $data]);
     }
 
     /**
@@ -96,15 +100,16 @@ class Anggota extends ResourceController
      */
     public function update($id = null)
     {
-        $anggota = $this->model;
+        $buku = $this->model;
         $getData = $this->request->getPost();
         $validation = Services::validation();
         $validation->setRules($this->rules());
+
         if (!$validation->withRequest($this->request)->run()) {
             return redirect()->back()->withInput()->with('errors', $validation->getErrors());
         }
-        $anggota->where('id', $id)->set($getData)->update();
-        return redirect()->to('/anggota')->with('success', 'Data berhasil diubah');
+        $buku->where('id', $id)->set($getData)->update();
+        return redirect()->to('/buku')->with('success', 'Data berhasil diubah');
     }
 
     /**
@@ -115,6 +120,6 @@ class Anggota extends ResourceController
     public function delete($id = null)
     {
         $this->model->delete($id);
-        return redirect()->to('/anggota')->with('success', 'Data berhasil dihapus');
+        return redirect()->to('/buku')->with('success', 'Data berhasil dihapus');
     }
 }

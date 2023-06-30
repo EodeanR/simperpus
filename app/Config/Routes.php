@@ -38,7 +38,7 @@ $routes->get('/', function () {
 // $routes->group('login', ['filter' => 'redirectIfAuthenticated'], function ($routes) {
 $routes->get('/login', 'LoginController::index');
 $routes->post('/login/auth', 'LoginController::auth');
-$routes->get('/dashboard/logout', 'LoginController::logout');
+$routes->get('/logout', 'LoginController::logout');
 // });
 $routes->get('/signup', 'SignUpController::index');
 $routes->post('/signup', 'SignUpController::signup');
@@ -47,11 +47,11 @@ $routes->get('/success', 'SignUpController::success');
 $routes->group('', ['filter' => 'authenticate'], function ($routes) {
     $routes->get('/dashboard', 'ViewController::v_dashboard');
     $routes->get('/admin',  'ViewController::v_admin');
-    $routes->get('/buku', 'ViewController::v_buku');
-    $routes->resource('anggota');
     $routes->get('/kategori', 'ViewController::v_kategori');
-    $routes->get('/peminjaman', 'ViewController::v_peminjaman');
-    $routes->get('/pengembalian', 'ViewController::v_pengembalian');
+    $routes->resource('anggota');
+    $routes->resource('buku');
+    $routes->resource('peminjaman');
+    $routes->resource('pengembalian');
 });
 /*
  * --------------------------------------------------------------------
